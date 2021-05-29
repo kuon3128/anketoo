@@ -11,15 +11,19 @@ class QuestionsController < ApplicationController
     @choices = @question.choices
   end
 
+  def new
+    @question = Question.new
+  end
+
   def create
-     @question = Question.new(question_params)
+     @question = current_user.questions.build(question_params)
 
     if @question.save
       flash[:success] = "アンケートを投稿しました。"
       redirect_to "/"
     else
       flash.now[:danger] = "アンケートの投稿に失敗しました。"
-      render "questions#new"
+      render :new
     end
   end
 
@@ -30,4 +34,12 @@ class QuestionsController < ApplicationController
   def question_params
     params.require(:question).permit(:content)
   end
+  
+  def vote(choice)
+    unless self == choice.question.user
+      @vote = Vote.create(user_id: @current_user, question_id: choice.question_id, choice_id: choice)
+    end
+  end
+
 end
+
