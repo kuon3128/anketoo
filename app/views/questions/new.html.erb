@@ -1,3 +1,5 @@
+<h3><%= @current_user.name %></h3>
+
 <div class="row">
   <aside class="col-sm-10">
     <%= form_with(model: @question, local: true) do |f| %>
@@ -10,7 +12,7 @@
   
     <%= form_with(model: @choice, local: true) do |f| %>
     
-    <label>回答１</label>
+      <label>回答１</label>
       <div class="form-group">
         <%= f.text_area :content, class: "form-control", rows: 1 %>
       </div>
@@ -33,4 +35,7 @@
     <% end %>  
   </aside>
 </div>
+
+<p>アンケート作成中・・・</p>
+
 

@@ -11,7 +11,9 @@
   
   <% @choices.each do |choice| %>
     <div class="alert alert-dark" role="alert">
-      <%= choice.content %>
+      <%= link_to choice.content %>
      </div>
   <% end %>
 </div>
+
+<%= link_to "Delete", @question, method: :delete, data: { confirm: "You sure?" }, class: "btn btn-danger btn-sm" %>
