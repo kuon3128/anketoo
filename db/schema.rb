@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_05_26_045626) do
+ActiveRecord::Schema.define(version: 2021_05_28_181425) do
 
   create_table "choices", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.bigint "question_id"
@@ -37,6 +37,20 @@ ActiveRecord::Schema.define(version: 2021_05_26_045626) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "votes", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.bigint "user_id"
+    t.bigint "question_id"
+    t.bigint "choice_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["choice_id"], name: "index_votes_on_choice_id"
+    t.index ["question_id"], name: "index_votes_on_question_id"
+    t.index ["user_id"], name: "index_votes_on_user_id"
+  end
+
   add_foreign_key "choices", "questions"
   add_foreign_key "questions", "users"
+  add_foreign_key "votes", "choices"
+  add_foreign_key "votes", "questions"
+  add_foreign_key "votes", "users"
 end

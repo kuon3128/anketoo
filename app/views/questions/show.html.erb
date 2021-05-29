@@ -1,0 +1,7 @@
+<h1>アンケート詳細</h1>
+
+<p><%= @question.content %></p>
+
+<% @choices.each do |choice| %>
+  <%= choice.content %>
+<% end %>

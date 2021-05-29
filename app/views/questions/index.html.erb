@@ -1,0 +1,17 @@
+<h1>アンケート一覧</h1>
+
+<div class="row">
+  <div class="col-sm-12">
+    <ul class="nav nav-tabs nav-justified mb-3">
+      <li class="nav-item"><a href="<%= questions_path(@question) %>" class="nav-link <%= "active" if current_page?(questions_path(@question)) %>">投票中</a></li>
+      <li class="nav-item"><a href="<%= finish_questions_path(@question) %>" class="nav-link <%= 'active' if current_page?(finish_questions_path(@question)) %>">投票終了</a></li>
+      <li class="nav-item"><a href="<%= all_questions_path(@question) %>" class="nav-link <%= 'active' if current_page?(all_questions_path(@question)) %>">全て</a></li>
+    </ul>
+    
+    <% @questions.each do |question| %>
+      <%= link_to question.content, question %>
+    <% end %>
+  </div>
+</div>
+
+
