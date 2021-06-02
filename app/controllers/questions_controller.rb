@@ -17,7 +17,7 @@ class QuestionsController < ApplicationController
   end
 
   def create
-     @question = current_user.questions.build(question_params)
+    @question = current_user.questions.build(question_params)
 
     if @question.save
       flash[:success] = "アンケートを投稿しました。"
@@ -39,11 +39,7 @@ class QuestionsController < ApplicationController
     params.require(:question).permit(:content, choices_attributes: :content)
   end
   
-  def vote(choice)
-    unless self == choice.question.user
-      @vote = Vote.create(user_id: @current_user, question_id: choice.question_id, choice_id: choice)
-    end
-  end
+ 
 
 end
 

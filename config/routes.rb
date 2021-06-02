@@ -1,5 +1,7 @@
 Rails.application.routes.draw do
 
+  get 'votes/create'
+  get 'votes/destroy'
   root to: "questions#index"
   
   get "login", to: "sessions#new"

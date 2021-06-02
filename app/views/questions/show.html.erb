@@ -1,19 +1,40 @@
 <h1>アンケート詳細</h1>
 
-<div class="container">
-    
-  <div class="card">
-    <div class="card-body">
-      <p><%= @question.content %></p>
+<% if current_user.vote? %>
+  <div class="container">
+      
+    <div class="card">
+      <div class="card-body">
+        <p><%= @question.content %></p>
+      </div>
     </div>
+    
+    
+    <% @choices.each do |choice| %>
+      <div class="alert alert-dark" role="alert">
+        <p><%= choice.content %></p>
+       </div>
+    <% end %>
   </div>
-  
-  
-  <% @choices.each do |choice| %>
-    <div class="alert alert-dark" role="alert">
-      <%= link_to choice.content %>
-     </div>
-  <% end %>
-</div>
 
-<%= link_to "Delete", @question, method: :delete, data: { confirm: "You sure?" }, class: "btn btn-danger btn-sm" %>
+<% else %>
+  <div class="container">
+      
+    <div class="card">
+      <div class="card-body">
+        <p><%= @question.content %></p>
+      </div>
+    </div>
+    
+    
+    <% @choices.each do |choice| %>
+      <div class="alert alert-dark" role="alert">
+        <%= button_to choice.content, {:controller => "votes", :action => "create"}, {:method => :get} %>
+       </div>
+    <% end %>
+  </div>
+<% end %>
+
+<% if current_user == @question.user %>
+  <%= link_to "Delete", @question, method: :delete, data: { confirm: "You sure?" }, class: "btn btn-danger btn-sm" %>
+<% end %>

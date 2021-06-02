@@ -8,9 +8,10 @@ class User < ApplicationRecord
   has_many :answers, through: :votes, source: :question  
   
   def vote(choice)
-    unless self == choice.question.user
-      @vote = Vote.create(user_id: @current_user, question_id: choice.question_id, choice_id: choice)
-    end
+    self.votes.find_or_create_by(user_id: @current_user, question_id: @question, choice_id: @choice)
   end
 
+  def vote?(user_id: @current_user, question_id: @question, choice_id: @choice)
+    self.votes.include?(user_id: @current_user, question_id: @question, choice_id: @choice)
+  end
 end
