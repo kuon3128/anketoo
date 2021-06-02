@@ -13,6 +13,7 @@ class QuestionsController < ApplicationController
 
   def new
     @question = Question.new
+    4.times { @question.choices.build }
   end
 
   def create
@@ -35,7 +36,7 @@ class QuestionsController < ApplicationController
   
   private
   def question_params
-    params.require(:question).permit(:content)
+    params.require(:question).permit(:content, choices_attributes: :content)
   end
   
   def vote(choice)

@@ -1,12 +1,12 @@
 class ChoicesController < ApplicationController
 
   def new
-    @choice = Choice.new
+    @choices = Choices.new
   end
   
   def create
-    @choice = current_user.choices.build(choice_params)
-    @choice.save
+    @choices = @question.choices.build(choice_params)
+    @choices.save
     redirect_to "/"
   end
 

@@ -2,40 +2,19 @@
 
 <div class="row">
   <aside class="col-sm-10">
-    <%= form_with(model: @question, local: true) do |f| %>
-      <label>質問記入欄</label>
-      <div class="form-group">
-        <%= f.text_area :content, class: "form-control", rows: 7 %>
-      </div>
-            <%= f.submit "投稿", class: "btn btn-primary" %>
-    <% end %>  
-  
-    <%= form_with(model: @choice, local: true) do |f| %>
-    
-      <label>回答１</label>
-      <div class="form-group">
-        <%= f.text_area :content, class: "form-control", rows: 1 %>
-      </div>
+    <%= form_for @question do |f| %>
+      <%= f.label :content %>
+      <%= f.text_area :content, size: "60x10" %>
       
-      <label>回答２</label>
-       <div class="form-group">
-        <%= f.text_area :content, class: "form-control", rows: 1 %>
-      </div>
+      <%= f.fields_for :choices do |choice_fields| %>
+        <%= choice_fields.label :content %>
+        <%= choice_fields.text_field :content, size: 60 %>
+
+      <% end %>
       
-      <label>回答３</label>
-       <div class="form-group">
-        <%= f.text_area :content, class: "form-control", rows: 1 %>
-      </div>
-      
-      <label>回答４</label>
-       <div class="form-group">
-        <%= f.text_area :content, class: "form-control", rows: 1 %>
-      </div>
-      <%= f.submit "投稿", class: "btn btn-primary" %>
-    <% end %>  
+      <%= f.submit "Submit" %>
+    <% end %>
   </aside>
 </div>
 
 <p>アンケート作成中・・・</p>
-
-

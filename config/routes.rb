@@ -7,7 +7,6 @@ Rails.application.routes.draw do
   delete "logout", to: "sessions#destroy"
   
   get "signup", to: "users#new"
-  
 
   resources :questions, only: [:index, :show, :new, :create, :destroy] do
     collection do
